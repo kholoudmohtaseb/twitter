@@ -1,0 +1,10 @@
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-flow: column wrap;
+background-image: url('https://www.eparent.com/wp-content/uploads/2015/10/1.png');
+background-repeat:no-repeat;
+background-size: cover;
+background-attachment: fixed;
+}

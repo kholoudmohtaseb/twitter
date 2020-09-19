@@ -1,26 +1,73 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="style.css" rel="stylesheet" type="text/css" />
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
   </head>
   <body>
+    <h1>Twittler</h1>
+    <input type="text">
+    <input type="button" value="Add Tweet" id="add=tweet" onclick=writeTweet('hello','shawndrost')>
+    <input type="button"  value="New" id="new-btn" onclick=s()>
+    <input type="button" value="back" id="back-btn" onclick=showAll() hidden=true >
+
+    <br>
     <script>
 
-      $(document).ready(function(){
+      function s(){
+        $("div").remove()
         var $body = $('body');
-        $body.html('');
-
         var index = streams.home.length - 1;
+        
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          var $tweet = $('<div onclick=showTweet()></div>');
+          //var tweet1 = $('<p onclick=showTweet()></p>')
+          $tweet.text('@' + tweet.user + ': ' + tweet.message +", time: "+Math.floor((new Date() - tweet.created_at)/60000) + "minutes ago");
+          console.log(tweet.created_at)
+          //console.log((new Date() - tweet.created_at)/60000)
+          var classname= tweet.user
+          $tweet.addClass(classname)
+          //tweet1.appendTo($tweet)
           $tweet.appendTo($body);
-          index -= 1;
+          index --;
+        }
+      }
+      function showTweet(){
+        //console.log(event.target.className)
+       // $('div').hide()
+       $('#back-btn').show()
+       $('#new-btn').hide()
+       for (var i=0; i<$("div").length; i++){
+          if( $("div")[i].getAttribute("class") !== event.target.className){
+            $('div')[i].hidden=true
+          }
+        }
+       //   var class1 = event.target.className;
+       //  $(class1).show();
+       //  console.log($(class1))
         }
 
-      });
+    function showAll(){
+     for (var i=0; i<$("div").length; i++){
+         $('div')[i].hidden=false
+        }
+      $('#back-btn').hide()
+      $('#new-btn').show()
+    }
+// function addTweets(message, visitor){
+//   writeTweet(message, visitor)
+//             var $tweet = $('<div onclick=showTweet()></div>');
+//           //var tweet1 = $('<p onclick=showTweet()></p>')
+//           $tweet.text('@' + tweet.user + ': ' + message +", time: "+Math.floor((new Date() - tweet.created_at)/60000) + "minutes ago");
+//           console.log(tweet.created_at)
+//           //console.log((new Date() - tweet.created_at)/60000)
+//           var classname= tweet.user
+//           $tweet.addClass(classname)
+//           //tweet1.appendTo($tweet)
+//           $tweet.appendTo($body);
+// }
 
     </script>
   </body>
